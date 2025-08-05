@@ -14,7 +14,6 @@ container_name=dongyang_test
 log_dir="/workspace/dongyang/1896"
 bench_script=ConvolutionWorkLoad_cuDNN_1896_v1
 
-dos2unix $log_dir/$bench_script.sh
 
 # 1. 收集主机环境信息到临时文件
 gather_host_env_info() {
