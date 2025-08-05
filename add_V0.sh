@@ -1,7 +1,12 @@
 #!/bin/bash
 
-input="ConvolutionWorkLoad_MIOpen_1896_v1.sh"
-output="ConvolutionWorkLoad_MIOpen_1896_v1_withV.sh"
+input="$1"
+output="$2"
+
+if [ -z "$input" ] || [ -z "$output" ]; then
+    echo "Usage: $0 <input_file> <output_file>"
+    exit 1
+fi
 
 # 保留原始 shebang（如果有）
 head -n 1 "$input" | grep -q "^#!" && head -n 1 "$input" > "$output"
