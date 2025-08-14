@@ -13,6 +13,7 @@ start_time=$(TZ='Asia/Shanghai' date +'%F %T %Z')
 container_name=dongyang_test
 log_dir="/workspace/dongyang/1896"
 bench_script=ConvolutionWorkLoad_cuDNN_1896_v1
+cudnn_dir=/workspace
 
 
 # 1. 收集主机环境信息到临时文件
@@ -67,7 +68,7 @@ gather_host_env_info > /tmp/eenv.log
 docker exec -i $container_name bash <<EOF
 log_dir="$log_dir"
 
-cd $log_dir/cudnn-bench
+cd $cudnn_dir/cudnn-bench
 # ./rebuild.sh
 source set_cuDNNDriver.sh
 
