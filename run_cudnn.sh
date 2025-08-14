@@ -67,6 +67,10 @@ gather_host_env_info > /tmp/eenv.log
 docker exec -i $container_name bash <<EOF
 log_dir="$log_dir"
 
+cd $log_dir/cudnn-bench
+# ./rebuild.sh
+source set_cuDNNDriver.sh
+
 # ======= 确保工作目录存在 =======
 mkdir -p \$log_dir
 
