@@ -1,19 +1,20 @@
 #!/bin/bash
 
-input="$1"
-output="$2"
-
-if [ -z "$input" ] || [ -z "$output" ]; then
+# 检查是否提供了正确数量的参数
+if [ "$#" -ne 2 ]; then
     echo "Usage: $0 <input_file> <output_file>"
     exit 1
 fi
 
-# 保留原始 shebang（如果有）
-head -n 1 "$input" | grep -q "^#!" && head -n 1 "$input" > "$output"
+input="$1"
+output="$2"
 
-# 处理每一行，末尾加上 ' -V 0'
-tail -n +2 "$input" | awk '{print $0 " -V 0"}' >> "$output"
+# 处理每一行，在末尾添加 ' -V 0'
+while read -r line; do
+    echo "$line -V 0" >> "$output"
+done < "$input"
 
+# 使输出文件可执行
 chmod +x "$output"
 
-echo "已生成新脚本：$output，每行末尾都加上了 -V 0"
+echo "已生成新脚本：$output，每行末尾都加上了 '-V 0'。"
